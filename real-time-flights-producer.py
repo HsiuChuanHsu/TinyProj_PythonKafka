@@ -26,19 +26,18 @@ def get_Airlabs_data():
     data = response.json()    
     return data
 
+def start_streaming():
+    FLIGHT_KAFKA_TOPIC = "Flight-Info"
+    producer = create_kafka_producer()
+    data = get_Airlabs_data()
 
-
-# Loop Over data and send to topic
-FLIGHT_KAFKA_TOPIC = "Flight-Info"
-producer = create_kafka_producer()
-data = get_Airlabs_data()
-
-for idx, x in enumerate(data['response']):
-    
-    producer.send(
-        FLIGHT_KAFKA_TOPIC
-        , json.dumps(x).encode("utf-8")
-    )
-    
-    print(f"Done Sending..{idx}")
-    time.sleep(0.2)
+    # Loop Over data and send to topic
+    for idx, x in enumerate(data['response']):
+        
+        producer.send(
+            FLIGHT_KAFKA_TOPIC
+            , json.dumps(x).encode("utf-8")
+        )
+        
+        print(f"Done Sending..{idx}")
+        
