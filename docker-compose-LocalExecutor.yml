@@ -10,8 +10,8 @@ services:
             options:
                 max-size: 10m
                 max-file: "3"
-        # networks:
-        #     - airflow-kafka
+        networks:
+            - airflow-kafka
 
     webserver:
         image: puckel/docker-airflow:latest
@@ -37,9 +37,9 @@ services:
             interval: 30s
             timeout: 30s
             retries: 3
-        # networks:
-        #     - airflow-kafka
+        networks:
+            - airflow-kafka
 
-# networks:
-#   airflow-kafka:
-#     external: true
+networks:
+    airflow-kafka:
+        external: true
