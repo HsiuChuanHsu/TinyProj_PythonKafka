@@ -1,7 +1,9 @@
 from datetime import timedelta
 from airflow import DAG
-from airflow import PythonOperator
+from airflow.operators.python_operator import PythonOperator
 from datetime import datetime
+
+
 from real_time_flights_producer import start_streaming
 
 
@@ -21,7 +23,7 @@ with DAG('Airlabs_Data'
     
     data_stream_task = PythonOperator(
         task_id='kafka_data_stream',
-        python_callable=start_streaming,
+        python_callable= start_streaming,
         dag=dag,
     )
 
